@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Working with data</title>
+
+    <style>
+        .item{
+            margin-bottom: 7px;
+            font-size: 15px;
+            margin-right: 2px;
+            min-height: 25px;
+            min-width: 20px;
+        }
+        .data {
+            background-color: steelblue;
+            text-align: right;
+            color: #f0f8ff;
+            display:inline-block;
+        }
+        .name{
+            display:inline-block;
+            margin-left:5px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="diagram">
+
+</div>
+
+
+<script src="../d3.js"></script>
+
+<script>
+    const phones = [
+        {
+            name: 'iPhone 5',
+            price: 64
+        },
+        {
+            name: 'iPhone 6',
+            price: 12
+        },
+        {
+            name: 'iPhone 7',
+            price: 25
+        },
+        {
+            name: 'LG G4',
+            price: 100
+        },
+        {
+            name: 'Samsung Galaxy',
+            price: 18
+        },
+        {
+            name: 'Nokia',
+            price: 18
+        }
+    ];
+
+    console.log(`phones: `, phones);
+
+    const mainElem = d3
+        .select('div.diagram');
+
+    // ENTER
+    mainElem
+        .selectAll('div')
+        .data(phones)
+        .enter()
+        .append('div')
+        .attr('class', 'item')
+        .append('div')
+        .attr('class', 'data')
+        .append('span');
+
+    // UPDATE
+    mainElem
+        .selectAll('div.item')
+        .data(phones)
+        .select('div')
+        .style('width', (d) => {
+            return (d.price * 3) + 'px';
+        })
+        .select('span')
+        .text((d) => {
+            return (d.price);
+        });
+
+    mainElem
+        .selectAll('div.item')
+        .data(phones)
+        .append('div')
+        .attr('class', 'name')
+        .text((d) => {
+            return d.name;
+        });
+
+    // EXIT
+    mainElem
+        .selectAll('div.item')
+        .data(phones)
+        .exit()
+        .remove();
+
+</script>
+
+</body>
+</html>

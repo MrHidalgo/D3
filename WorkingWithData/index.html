@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Working with data</title>
+</head>
+<body>
+
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+</ul>
+
+
+<script src="../d3.js"></script>
+
+<script>
+    const phones = [
+        'iPhone 5',
+        'iPhone 6',
+        'iPhone 7',
+        'LG G4',
+        'Samsung Galaxy',
+    ];
+
+    let elemList = d3
+        .select('ul')
+        .selectAll('li')
+        .data(phones)
+        .text((d, i) => {
+            console.log(`without enter: ${i} - ${d}`);
+            return d
+        });
+
+    elemList
+        .enter()
+        .append('li')
+        .text((d,i) => {
+            console.log(`with: ${i} - ${d}`);
+            return d;
+        });
+
+
+</script>
+
+</body>
+</html>

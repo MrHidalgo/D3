@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Functions for working with data</title>
+</head>
+<body>
+
+<script src="../d3.js"></script>
+
+<script>
+    const phones = [
+        {name: 'iPhone 6',              price: 64, company: 'Apple'},
+        {name: 'iPhone 5s',             price: 49, company: 'Apple'},
+        {name: 'iPad Air',              price: 37, company: 'Apple'},
+        {name: 'Samsung Galaxy S5',     price: 48, company: 'Samsung'},
+        {name: 'Noika',                 price: 48, company: 'Nokia'},
+        {name: 'Samsung Galaxy Note',   price: 36, company: 'Samsung'},
+        {name: 'Samsung Galaxy Tab 4',  price: 28, company: 'Samsung'}
+    ];
+
+    let nest = d3
+        .nest()
+        .key((d) => {
+            return d.company;
+        })
+        .entries(phones);
+
+    console.log(`nest: `, nest);
+
+    let printArray = (nest) => {
+        nest.forEach((e) => {
+            // console.log(`e: `, e);
+
+            if (e.key) {
+                console.log(e.key);
+            } else {
+                console.log(printObject(e));
+            }
+
+            if (e.values) {
+                printArray(e.values);
+            }
+        });
+    };
+
+    let printObject = (obj) =>  {
+        let s = "{";
+        for (let f in obj) {
+            s += f + ": " + obj[f] + ", ";
+        }
+        s += "}";
+        return s;
+    };
+
+    printArray(nest);
+
+</script>
+</body>
+</html>

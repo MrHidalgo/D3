@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Selection of elements and operators</title>
+</head>
+<body>
+
+<div class="red">red 1</div>
+<div class="blue">blue 1</div>
+<div class="red">red 2</div>
+<div class="blue">blue 2</div>
+<div class="green">green</div>
+
+<script src="../d3.js"></script>
+
+<script>
+    let elem1 = d3.select('div.red').append('svg').append('rect');
+
+    console.log(`elem 1: ${elem1}`);
+</script>
+
+</body>
+</html>

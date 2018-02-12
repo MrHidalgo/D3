@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Functions for working with data</title>
+</head>
+<body>
+
+<script src="../d3.js"></script>
+
+<script>
+    const data = [3, 8, 21, 13, 1, 2, 5];
+
+    console.log('data: ' + data);
+    console.log('d3.max: ' + d3.max(data));
+    console.log('d3.min: ' + d3.min(data));
+    console.log('d3.extent: ' + d3.extent(data));
+    console.log('d3.sum: ' + d3.sum(data));
+    console.log('d3.median: ' + d3.median(data));
+    console.log('d3.mean: ' + d3.mean(data));
+    console.log('d3.quantile: ' + d3.quantile(data.sort(d3.ascending), 0.25));
+    console.log('d3.ascending: ' + data.sort(d3.ascending));
+    console.log('d3.descending: ' + data.sort(d3.descending));
+    console.log('d3.bisect: '+ d3.bisect(data.sort(d3.ascending), 11))
+</script>
+</body>
+</html>
