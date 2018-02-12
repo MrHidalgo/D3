@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Filtering data</title>
+
+    <style>
+        .item {
+            margin-bottom: 7px;
+            font-size: 12px;
+            min-height: 20px;
+            min-width: 20px;
+            padding-right: 3px;
+            padding-top: 8px;
+            background-color: steelblue;
+            text-align: right;
+            color: #f0f8ff;
+        }
+
+        .unselected {
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+
+<select id="select" onchange="select()">
+    <option>All</option>
+    <option>Apple</option>
+    <option>Samsung</option>
+</select>
+
+<br/><br/>
+
+<div class="diagram"></div>
+
+<script src="../d3.js"></script>
+
+<script>
+    const phones = [
+        {name: 'iPhone 6',              price: 64, company: 'Apple'},
+        {name: 'Samsung Galaxy Tab 4',  price: 28, company: 'Samsung'},
+        {name: 'iPhone 5s',             price: 49, company: 'Apple'},
+        {name: 'Samsung Galaxy S5',     price: 48, company: 'Samsung'},
+        {name: 'iPad Air',              price: 37, company: 'Apple'},
+        {name: 'Samsung Galaxy Note',   price: 36, company: 'Samsung'},
+    ];
+
+    let elem = d3
+        .select("div.diagram");
+
+    let initLib = (phones) => {
+        elem
+            .selectAll("div")
+            .data(phones)
+            .enter()
+            .append('div')
+            .attr('class', 'item')
+            .append('span');
+
+        elem
+            .selectAll("div.item")
+            .data(phones)
+            .attr("class", "item")
+            .style('width', (d) => {
+                return (d.price * 6) + 'px';
+            })
+            .select('span')
+            .text((d) => {
+                return d.name;
+            });
+
+        elem
+            .selectAll("div.item")
+            .data(phones)
+            .exit()
+            .remove();
+    };
+
+    let showGraphFilter = (phones, company) => {
+
+        initLib(phones);
+
+        elem
+            .selectAll("div.item")
+            .filter((d, i) => {
+                if(company && company !== 'All') {
+                    return !(d.company === company);
+                }
+                else {
+                    return false;
+                }
+            })
+            .classed("unselected", true);
+    };
+
+    let loadGraph = (phones) => {
+        initLib(phones);
+
+    };
+
+    let select = () => {
+        let company = document.getElementById("select").value;
+
+        showGraphFilter(phones, company);
+    };
+
+    loadGraph(phones);
+</script>
+</body>
+</html>
